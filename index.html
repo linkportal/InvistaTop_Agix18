@@ -6,6 +6,8 @@
     <title>InvistaTop - Investimento Imobiliário Inteligente</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         :root {
             --primary-blue: #1B4EFF;
@@ -18,12 +20,6 @@
             --dark-gray: #495057;
         }
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
         body {
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
@@ -31,80 +27,15 @@
             background-color: #fff;
         }
         
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Header */
-        header {
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-        
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--primary-blue);
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-        
-        .nav-links li {
-            margin-left: 30px;
-        }
-        
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark-gray);
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        .nav-links a:hover {
-            color: var(--primary-blue);
-        }
-        
-        .auth-buttons {
-            display: flex;
-            gap: 15px;
+        .hero-gradient {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e6eeff 100%);
         }
         
         .btn {
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
             transition: all 0.3s ease;
             border: none;
-            font-size: 14px;
-        }
-        
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--primary-blue);
-            color: var(--primary-blue);
-        }
-        
-        .btn-primary {
-            background: var(--primary-blue);
-            color: white;
+            font-weight: 600;
+            cursor: pointer;
         }
         
         .btn:hover {
@@ -112,142 +43,7 @@
             box-shadow: 0 4px 12px rgba(27, 78, 255, 0.3);
         }
         
-        /* Hero Section */
-        .hero {
-            padding: 150px 0 100px;
-            background: linear-gradient(135deg, #f0f4ff 0%, #e6eeff 100%);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero-content {
-            display: flex;
-            align-items: center;
-            gap: 50px;
-        }
-        
-        .hero-text {
-            flex: 1;
-        }
-        
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            background: linear-gradient(90deg, var(--primary-blue), var(--dark-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--dark-gray);
-            margin-bottom: 30px;
-            max-width: 600px;
-        }
-        
-        .hero-stats {
-            display: flex;
-            gap: 30px;
-            margin: 30px 0;
-        }
-        
-        .stat-item {
-            text-align: center;
-        }
-        
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary-blue);
-        }
-        
-        .stat-label {
-            font-size: 0.9rem;
-            color: var(--dark-gray);
-        }
-        
-        .hero-image {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-        }
-        
-        .dashboard-preview {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            padding: 20px;
-            width: 100%;
-            max-width: 500px;
-            position: relative;
-        }
-        
-        .dashboard-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .dashboard-card {
-            background: linear-gradient(135deg, #f8f9ff 0%, #eef2ff 100%);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 15px;
-        }
-        
-        .progress-bar {
-            height: 10px;
-            background: var(--medium-gray);
-            border-radius: 5px;
-            margin-top: 10px;
-            overflow: hidden;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: var(--primary-blue);
-            border-radius: 5px;
-            width: 75%;
-        }
-        
-        /* Projects Section */
-        .section {
-            padding: 100px 0;
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--dark-blue);
-            margin-bottom: 15px;
-        }
-        
-        .section-subtitle {
-            font-size: 1.2rem;
-            color: var(--dark-gray);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
         .project-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
@@ -256,124 +52,7 @@
             box-shadow: 0 15px 40px rgba(0,0,0,0.15);
         }
         
-        .project-image {
-            height: 200px;
-            background: linear-gradient(45deg, var(--primary-blue), var(--dark-blue));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-        
-        .project-content {
-            padding: 25px;
-        }
-        
-        .project-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        
-        .project-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--dark-blue);
-        }
-        
-        .risk-badge {
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        
-        .risk-high {
-            background: rgba(255, 71, 87, 0.1);
-            color: var(--negative-red);
-        }
-        
-        .risk-medium {
-            background: rgba(255, 184, 0, 0.1);
-            color: var(--warning-yellow);
-        }
-        
-        .risk-low {
-            background: rgba(0, 200, 150, 0.1);
-            color: var(--positive-green);
-        }
-        
-        .project-details {
-            margin: 20px 0;
-        }
-        
-        .detail-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-        
-        .detail-label {
-            color: var(--dark-gray);
-        }
-        
-        .detail-value {
-            font-weight: 600;
-        }
-        
-        .project-progress {
-            margin: 20px 0;
-        }
-        
-        .progress-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-        }
-        
-        .progress-bar {
-            height: 8px;
-            background: var(--medium-gray);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            border-radius: 4px;
-        }
-        
-        .project-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        
-        .btn-small {
-            padding: 8px 15px;
-            font-size: 0.9rem;
-        }
-        
-        /* How It Works */
-        .how-it-works {
-            background: linear-gradient(135deg, #f0f4ff 0%, #e6eeff 100%);
-        }
-        
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-        
         .step-card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             transition: transform 0.3s ease;
         }
         
@@ -381,259 +60,108 @@
             transform: translateY(-5px);
         }
         
-        .step-number {
-            width: 50px;
-            height: 50px;
-            background: var(--primary-blue);
-            color: white;
+        .loading-spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: var(--primary-blue);
             border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .status-indicator {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin: 0 auto 20px;
-        }
-        
-        .step-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--dark-blue);
-            margin-bottom: 15px;
-        }
-        
-        .step-description {
-            color: var(--dark-gray);
-        }
-        
-        /* Stats Section */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-        }
-        
-        .stat-card {
-            text-align: center;
-            padding: 30px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-        }
-        
-        .stat-icon {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: var(--primary-blue);
-        }
-        
-        .stat-value-large {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--dark-blue);
-            margin-bottom: 10px;
-        }
-        
-        /* Footer */
-        footer {
-            background: var(--dark-blue);
-            color: white;
-            padding: 70px 0 30px;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 50px;
-        }
-        
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: var(--primary-blue);
-        }
-        
-        .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-        
-        .footer-links a {
-            color: #ccc;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-links a:hover {
-            color: white;
-        }
-        
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: #aaa;
-            font-size: 0.9rem;
-        }
-        
-        .cta-section {
-            text-align: center;
-            padding: 60px 0;
-            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
-            color: white;
-            border-radius: 20px;
-            margin: 50px 0;
-        }
-        
-        .cta-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-        
-        .cta-description {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 30px;
-        }
-        
-        .btn-light {
-            background: white;
-            color: var(--primary-blue);
-            font-weight: 700;
-            padding: 15px 40px;
-            font-size: 1.1rem;
-        }
-        
-        /* Responsive */
-        @media (max-width: 992px) {
-            .hero-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .hero-stats {
-                justify-content: center;
-            }
-            
-            .hero h1 {
-                font-size: 2.8rem;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .hero {
-                padding: 120px 0 80px;
-            }
-            
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            
-            .section {
-                padding: 70px 0;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
+            gap: 5px;
         }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <header>
-        <div class="container">
-            <nav class="navbar">
-                <div class="logo">InvistaTop</div>
-                <ul class="nav-links">
-                    <li><a href="#home">Início</a></li>
-                    <li><a href="#projects">Projetos</a></li>
-                    <li><a href="#how-it-works">Como Funciona</a></li>
-                    <li><a href="#stats">Estatísticas</a></li>
+    <header class="bg-white shadow-md fixed w-full top-0 z-1000">
+        <div class="container mx-auto px-4">
+            <nav class="flex justify-between items-center py-5">
+                <div class="text-2xl font-bold text-blue-600">InvistaTop</div>
+                <ul class="hidden md:flex list-none gap-8">
+                    <li><a href="#home" class="text-gray-700 hover:text-blue-600 font-medium">Início</a></li>
+                    <li><a href="#projects" class="text-gray-700 hover:text-blue-600 font-medium">Projetos</a></li>
+                    <li><a href="#how-it-works" class="text-gray-700 hover:text-blue-600 font-medium">Como Funciona</a></li>
+                    <li><a href="#stats" class="text-gray-700 hover:text-blue-600 font-medium">Estatísticas</a></li>
                 </ul>
-                <div class="auth-buttons">
-                    <button class="btn btn-outline">Entrar</button>
-                    <button class="btn btn-primary">Cadastre-se</button>
+                <div class="flex gap-3">
+                    <button class="px-5 py-2.5 rounded-full border-2 border-blue-600 text-blue-600 hover:bg-blue-50">Entrar</button>
+                    <button class="px-5 py-2.5 rounded-full bg-blue-600 text-white hover:bg-blue-700">Cadastre-se</button>
                 </div>
             </nav>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1>Investimento Imobiliário Inteligente com IA</h1>
-                    <p>Invista em projetos de alto padrão com rentabilidade acima do mercado. Tecnologia, segurança e transparência em cada investimento.</p>
+    <section id="home" class="hero-gradient pt-32 pb-20 md:pt-40 md:pb-28">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
+                        <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-800">
+                            Investimento Imobiliário Inteligente com IA
+                        </span>
+                    </h1>
+                    <p class="text-lg text-gray-700 mb-8 max-w-2xl">
+                        Invista em projetos de alto padrão com rentabilidade acima do mercado. Tecnologia, segurança e transparência em cada investimento.
+                    </p>
                     
-                    <div class="hero-stats">
-                        <div class="stat-item">
-                            <div class="stat-value">12%</div>
-                            <div class="stat-label">Rentabilidade Média</div>
+                    <div class="flex flex-wrap gap-8 mb-10">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-blue-600">12%</div>
+                            <div class="text-gray-600">Rentabilidade Média</div>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-value">R$2.5M</div>
-                            <div class="stat-label">Captação Total</div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-blue-600">R$2.5M</div>
+                            <div class="text-gray-600">Captação Total</div>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-value">24/7</div>
-                            <div class="stat-label">Suporte</div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-blue-600">24/7</div>
+                            <div class="text-gray-600">Suporte</div>
                         </div>
                     </div>
                     
-                    <div class="hero-buttons">
-                        <button class="btn btn-primary">Começar Agora</button>
-                        <button class="btn btn-outline">Ver Projetos</button>
+                    <div class="flex flex-wrap gap-4">
+                        <button class="px-8 py-3.5 rounded-full bg-blue-600 text-white font-bold hover:bg-blue-700">Começar Agora</button>
+                        <button class="px-8 py-3.5 rounded-full border-2 border-blue-600 text-blue-600 font-bold hover:bg-blue-50">Ver Projetos</button>
                     </div>
                 </div>
                 
-                <div class="hero-image">
-                    <div class="dashboard-preview">
-                        <div class="dashboard-header">
-                            <h3>Seu Painel</h3>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="bg-white rounded-2xl shadow-xl p-6 w-full max-w-md">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-xl font-bold">Seu Painel</h3>
                             <div class="status-indicator">
-                                <i class="fas fa-circle" style="color: var(--positive-green);"></i>
-                                <span>Online</span>
+                                <i class="fas fa-circle text-green-500 text-xs"></i>
+                                <span class="text-sm">Online</span>
                             </div>
                         </div>
                         
-                        <div class="dashboard-card">
-                            <h4>Saldo Disponível</h4>
-                            <div class="stat-value">R$ 12.500,00</div>
+                        <div class="bg-blue-50 rounded-xl p-5 mb-5">
+                            <h4 class="font-semibold mb-2">Saldo Disponível</h4>
+                            <div class="text-2xl font-bold">R$ 12.500,00</div>
                         </div>
                         
-                        <div class="dashboard-card">
-                            <h4>Projetos Ativos</h4>
-                            <div class="stat-value">5</div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 75%;"></div>
+                        <div class="bg-blue-50 rounded-xl p-5 mb-5">
+                            <h4 class="font-semibold mb-2">Projetos Ativos</h4>
+                            <div class="text-2xl font-bold">5</div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5 mt-3">
+                                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 75%"></div>
                             </div>
                         </div>
                         
-                        <div class="dashboard-card">
-                            <h4>Rentabilidade Média</h4>
-                            <div class="stat-value" style="color: var(--positive-green);">12.5%</div>
+                        <div class="bg-blue-50 rounded-xl p-5">
+                            <h4 class="font-semibold mb-2">Rentabilidade Média</h4>
+                            <div class="text-2xl font-bold text-green-500">12.5%</div>
                         </div>
                     </div>
                 </div>
@@ -642,322 +170,344 @@
     </section>
 
     <!-- Projects Section -->
-    <section class="section" id="projects">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Projetos em Destaque</h2>
-                <p class="section-subtitle">Invista nos melhores projetos imobiliários com alta rentabilidade e segurança</p>
+    <section id="projects" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-blue-800 mb-4">Projetos em Destaque</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Invista nos melhores projetos imobiliários com alta rentabilidade e segurança
+                </p>
             </div>
             
-            <div class="projects-grid">
-                <!-- Project 1 -->
-                <div class="project-card">
-                    <div class="project-image">
-                        Residencial Premium
-                    </div>
-                    <div class="project-content">
-                        <div class="project-header">
-                            <h3 class="project-title">Residencial Premium</h3>
-                            <span class="risk-badge risk-low">Baixo Risco</span>
-                        </div>
-                        
-                        <div class="project-details">
-                            <div class="detail-item">
-                                <span class="detail-label">Rentabilidade:</span>
-                                <span class="detail-value" style="color: var(--positive-green);">12% a.a.</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">Prazo:</span>
-                                <span class="detail-value">24 meses</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">Localização:</span>
-                                <span class="detail-value">São Paulo</span>
-                            </div>
-                        </div>
-                        
-                        <div class="project-progress">
-                            <div class="progress-info">
-                                <span>Captação</span>
-                                <span>75%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 75%;"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="project-actions">
-                            <button class="btn btn-outline btn-small">Resumo</button>
-                            <button class="btn btn-primary btn-small">Investir</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Project 2 -->
-                <div class="project-card">
-                    <div class="project-image">
-                        Empreendimento Comercial
-                    </div>
-                    <div class="project-content">
-                        <div class="project-header">
-                            <h3 class="project-title">Empreendimento Comercial</h3>
-                            <span class="risk-badge risk-medium">Médio Risco</span>
-                        </div>
-                        
-                        <div class="project-details">
-                            <div class="detail-item">
-                                <span class="detail-label">Rentabilidade:</span>
-                                <span class="detail-value" style="color: var(--positive-green);">15% a.a.</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">Prazo:</span>
-                                <span class="detail-value">36 meses</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">Localização:</span>
-                                <span class="detail-value">Rio de Janeiro</span>
-                            </div>
-                        </div>
-                        
-                        <div class="project-progress">
-                            <div class="progress-info">
-                                <span>Captação</span>
-                                <span>60%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 60%; background: var(--warning-yellow);"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="project-actions">
-                            <button class="btn btn-outline btn-small">Resumo</button>
-                            <button class="btn btn-primary btn-small">Investir</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Project 3 -->
-                <div class="project-card">
-                    <div class="project-image">
-                        Condomínio de Luxo
-                    </div>
-                    <div class="project-content">
-                        <div class="project-header">
-                            <h3 class="project-title">Condomínio de Luxo</h3>
-                            <span class="risk-badge risk-high">Alto Risco</span>
-                        </div>
-                        
-                        <div class="project-details">
-                            <div class="detail-item">
-                                <span class="detail-label">Rentabilidade:</span>
-                                <span class="detail-value" style="color: var(--positive-green);">18% a.a.</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">Prazo:</span>
-                                <span class="detail-value">48 meses</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">Localização:</span>
-                                <span class="detail-value">Belo Horizonte</span>
-                            </div>
-                        </div>
-                        
-                        <div class="project-progress">
-                            <div class="progress-info">
-                                <span>Captação</span>
-                                <span>45%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 45%; background: var(--negative-red);"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="project-actions">
-                            <button class="btn btn-outline btn-small">Resumo</button>
-                            <button class="btn btn-primary btn-small">Investir</button>
-                        </div>
-                    </div>
-                </div>
+            <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Projects will be loaded here -->
+                <div class="loading-spinner"></div>
             </div>
         </div>
     </section>
 
     <!-- How It Works Section -->
-    <section class="section how-it-works" id="how-it-works">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Como Funciona</h2>
-                <p class="section-subtitle">Invista em projetos imobiliários de forma simples, segura e rentável</p>
+    <section id="how-it-works" class="py-20 bg-blue-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-blue-800 mb-4">Como Funciona</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Invista em projetos imobiliários de forma simples, segura e rentável
+                </p>
             </div>
             
-            <div class="steps">
-                <div class="step-card">
-                    <div class="step-number">1</div>
-                    <h3 class="step-title">Cadastre-se</h3>
-                    <p class="step-description">Crie sua conta em menos de 2 minutos. Processo 100% digital e seguro.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-shadow">
+                    <div class="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6">1</div>
+                    <h3 class="text-2xl font-bold text-blue-800 mb-4">Cadastre-se</h3>
+                    <p class="text-gray-600">Crie sua conta em menos de 2 minutos. Processo 100% digital e seguro.</p>
                 </div>
                 
-                <div class="step-card">
-                    <div class="step-number">2</div>
-                    <h3 class="step-title">IA Analisa seu Perfil</h3>
-                    <p class="step-description">Nossa inteligência artificial analisa seu perfil e sugere os melhores projetos.</p>
+                <div class="bg-white rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-shadow">
+                    <div class="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6">2</div>
+                    <h3 class="text-2xl font-bold text-blue-800 mb-4">IA Analisa seu Perfil</h3>
+                    <p class="text-gray-600">Nossa inteligência artificial analisa seu perfil e sugere os melhores projetos.</p>
                 </div>
                 
-                <div class="step-card">
-                    <div class="step-number">3</div>
-                    <h3 class="step-title">Invista via PIX</h3>
-                    <p class="step-description">Transfira o valor via PIX e pronto! Você já é coproprietário de imóveis de alto padrão.</p>
+                <div class="bg-white rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-shadow">
+                    <div class="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6">3</div>
+                    <h3 class="text-2xl font-bold text-blue-800 mb-4">Invista via PIX</h3>
+                    <p class="text-gray-600">Transfira o valor via PIX e pronto! Você já é coproprietário de imóveis de alto padrão.</p>
                 </div>
                 
-                <div class="step-card">
-                    <div class="step-number">4</div>
-                    <h3 class="step-title">Receba Dividendos</h3>
-                    <p class="step-description">Receba dividendos mensais automaticamente em sua conta. Renda passiva garantida!</p>
+                <div class="bg-white rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-shadow">
+                    <div class="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6">4</div>
+                    <h3 class="text-2xl font-bold text-blue-800 mb-4">Receba Dividendos</h3>
+                    <p class="text-gray-600">Receba dividendos mensais automaticamente em sua conta. Renda passiva garantida!</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Stats Section -->
-    <section class="section" id="stats">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Nossos Números</h2>
-                <p class="section-subtitle">Resultados que falam por si</p>
+    <section id="stats" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-blue-800 mb-4">Nossos Números</h2>
+                <p class="text-xl text-gray-600">Resultados que falam por si</p>
             </div>
             
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-blue-50 rounded-2xl p-8 text-center shadow-lg">
+                    <div class="text-5xl text-blue-600 mb-4">
                         <i class="fas fa-users"></i>
                     </div>
-                    <div class="stat-value-large">5.000+</div>
-                    <div class="stat-label">Investidores</div>
+                    <div class="text-4xl font-bold text-blue-800 mb-2">5.000+</div>
+                    <div class="text-gray-600">Investidores</div>
                 </div>
                 
-                <div class="stat-card">
-                    <div class="stat-icon">
+                <div class="bg-blue-50 rounded-2xl p-8 text-center shadow-lg">
+                    <div class="text-5xl text-blue-600 mb-4">
                         <i class="fas fa-building"></i>
                     </div>
-                    <div class="stat-value-large">120+</div>
-                    <div class="stat-label">Projetos</div>
+                    <div class="text-4xl font-bold text-blue-800 mb-2">120+</div>
+                    <div class="text-gray-600">Projetos</div>
                 </div>
                 
-                <div class="stat-card">
-                    <div class="stat-icon">
+                <div class="bg-blue-50 rounded-2xl p-8 text-center shadow-lg">
+                    <div class="text-5xl text-blue-600 mb-4">
                         <i class="fas fa-chart-line"></i>
                     </div>
-                    <div class="stat-value-large">14.5%</div>
-                    <div class="stat-label">Rentabilidade Média</div>
+                    <div class="text-4xl font-bold text-blue-800 mb-2">14.5%</div>
+                    <div class="text-gray-600">Rentabilidade Média</div>
                 </div>
                 
-                <div class="stat-card">
-                    <div class="stat-icon">
+                <div class="bg-blue-50 rounded-2xl p-8 text-center shadow-lg">
+                    <div class="text-5xl text-blue-600 mb-4">
                         <i class="fas fa-hand-holding-usd"></i>
                     </div>
-                    <div class="stat-value-large">R$50M</div>
-                    <div class="stat-label">Captação Total</div>
+                    <div class="text-4xl font-bold text-blue-800 mb-2">R$50M</div>
+                    <div class="text-gray-600">Captação Total</div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="container">
-        <div class="cta-section">
-            <h2 class="cta-title">Pronto para Começar?</h2>
-            <p class="cta-description">Junte-se a milhares de investidores que já estão gerando renda passiva com a InvistaTop</p>
-            <button class="btn btn-light">Criar Conta Gratuita</button>
+    <section class="py-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-6">Pronto para Começar?</h2>
+            <p class="text-xl max-w-3xl mx-auto mb-10">
+                Junte-se a milhares de investidores que já estão gerando renda passiva com a InvistaTop
+            </p>
+            <button class="px-10 py-4 bg-white text-blue-600 font-bold rounded-full hover:bg-blue-50 text-lg">
+                Criar Conta Gratuita
+            </button>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>InvistaTop</h3>
-                    <p style="color: #ccc; margin-bottom: 20px;">Investimento imobiliário inteligente com tecnologia de ponta e segurança garantida.</p>
+    <footer class="bg-blue-900 text-white pt-20 pb-10">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-16">
+                <div class="lg:col-span-1">
+                    <h3 class="text-2xl font-bold mb-6">InvistaTop</h3>
+                    <p class="text-gray-300 mb-6">
+                        Investimento imobiliário inteligente com tecnologia de ponta e segurança garantida.
+                    </p>
                     <div class="status-indicator">
-                        <i class="fas fa-circle" style="color: var(--positive-green); font-size: 0.8rem;"></i>
-                        <span style="color: #ccc; margin-left: 5px;">Conectado ao Supabase</span>
+                        <i class="fas fa-circle text-green-500 text-sm"></i>
+                        <span class="text-gray-300 ml-2">Conectado ao Supabase</span>
                     </div>
                 </div>
                 
-                <div class="footer-column">
-                    <h3>Links Rápidos</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Início</a></li>
-                        <li><a href="#projects">Projetos</a></li>
-                        <li><a href="#how-it-works">Como Funciona</a></li>
-                        <li><a href="#stats">Estatísticas</a></li>
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Links Rápidos</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-300 hover:text-white">Início</a></li>
+                        <li><a href="#projects" class="text-gray-300 hover:text-white">Projetos</a></li>
+                        <li><a href="#how-it-works" class="text-gray-300 hover:text-white">Como Funciona</a></li>
+                        <li><a href="#stats" class="text-gray-300 hover:text-white">Estatísticas</a></li>
                     </ul>
                 </div>
                 
-                <div class="footer-column">
-                    <h3>Recursos</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Suporte</a></li>
-                        <li><a href="#">Documentação</a></li>
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Recursos</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-300 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">FAQ</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Suporte</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Documentação</a></li>
                     </ul>
                 </div>
                 
-                <div class="footer-column">
-                    <h3>Legal</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Termos de Uso</a></li>
-                        <li><a href="#">Política de Privacidade</a></li>
-                        <li><a href="#">LGPD</a></li>
-                        <li><a href="#">Compliance</a></li>
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Legal</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-300 hover:text-white">Termos de Uso</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Política de Privacidade</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">LGPD</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Compliance</a></li>
                     </ul>
                 </div>
             </div>
             
-            <div class="footer-bottom">
+            <div class="border-t border-blue-800 pt-8 text-center text-gray-400">
                 <p>&copy; 2023 InvistaTop. Todos os direitos reservados. | Desenvolvido com ❤️ para investidores inteligentes</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Simple scroll animation for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+        // Inicializar Supabase
+        const supabaseUrl = 'https://bhhynlkstyraemgkjhoe.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJoaHlubGtzdHlyYWVtZ2tqaG9lIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIzMTA5NTAsImV4cCI6MjA2Nzg4Njk1MH0.FnPMp882tTyKwka73jzsgfMfh0nGO4K5pyL34TJtUUQ';
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+        
+        // Função para buscar projetos do Supabase
+        async function fetchProjects() {
+            try {
+                const { data, error } = await supabase
+                    .from('projetos')
+                    .select('*')
+                    .limit(3);
+                
+                if (error) throw error;
+                
+                renderProjects(data);
+            } catch (error) {
+                console.error('Erro ao buscar projetos:', error);
+                document.getElementById('projects-container').innerHTML = 
+                    '<div class="col-span-full text-center py-10 text-red-500">Erro ao carregar projetos. Tente novamente mais tarde.</div>';
+            }
+        }
+        
+        // Função para renderizar projetos
+        function renderProjects(projects) {
+            const container = document.getElementById('projects-container');
+            
+            if (!projects || projects.length === 0) {
+                container.innerHTML = '<div class="col-span-full text-center py-10">Nenhum projeto disponível no momento.</div>';
+                return;
+            }
+            
+            container.innerHTML = projects.map(project => {
+                // Determinar classe de risco
+                let riskClass = 'bg-gray-100 text-gray-800';
+                let riskText = 'Risco Não Definido';
+                
+                if (project.nivel_risco === 'baixo') {
+                    riskClass = 'bg-green-100 text-green-800';
+                    riskText = 'Baixo Risco';
+                } else if (project.nivel_risco === 'medio') {
+                    riskClass = 'bg-yellow-100 text-yellow-800';
+                    riskText = 'Médio Risco';
+                } else if (project.nivel_risco === 'alto') {
+                    riskClass = 'bg-red-100 text-red-800';
+                    riskText = 'Alto Risco';
+                }
+                
+                // Calcular porcentagem de captação
+                const captacaoPercent = project.valor_arrecadado && project.valor_total ? 
+                    Math.min(100, Math.round((project.valor_arrecadado / project.valor_total) * 100)) : 0;
+                
+                return `
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all">
+                        <div class="h-48 bg-gradient-to-r from-blue-500 to-blue-700 flex items-center justify-center text-white text-xl font-bold">
+                            ${project.nome || 'Projeto Imobiliário'}
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-xl font-bold text-blue-800">${project.nome || 'Projeto Sem Nome'}</h3>
+                                <span class="px-3 py-1 rounded-full text-sm font-semibold ${riskClass}">
+                                    ${riskText}
+                                </span>
+                            </div>
+                            
+                            <div class="space-y-3 mb-6">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Rentabilidade:</span>
+                                    <span class="font-semibold text-green-500">${project.rentabilidade_anual || '0'}% a.a.</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Prazo:</span>
+                                    <span class="font-semibold">${project.prazo_meses || '0'} meses</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Localização:</span>
+                                    <span class="font-semibold">${project.localizacao || 'Não informada'}</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <div class="flex justify-between mb-2">
+                                    <span>Captação</span>
+                                    <span>${captacaoPercent}%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-blue-600 h-2.5 rounded-full" style="width: ${captacaoPercent}%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex gap-3">
+                                <button class="flex-1 py-2.5 px-4 border-2 border-blue-600 text-blue-600 rounded-full font-medium hover:bg-blue-50">
+                                    Resumo
+                                </button>
+                                <button class="flex-1 py-2.5 px-4 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700">
+                                    Investir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // Função para buscar estatísticas do Supabase
+        async function fetchStats() {
+            try {
+                // Buscar contagem de usuários
+                const { count: userCount, error: userError } = await supabase
+                    .from('usuarios')
+                    .select('*', { count: 'exact', head: true });
+                
+                if (userError) throw userError;
+                
+                // Buscar contagem de projetos
+                const { count: projectCount, error: projectError } = await supabase
+                    .from('projetos')
+                    .select('*', { count: 'exact', head: true });
+                
+                if (projectError) throw projectError;
+                
+                // Atualizar estatísticas na UI
+                document.querySelector('.stats-grid').innerHTML = `
+                    <div class="bg-blue-50 rounded-2xl p-8 text-center shadow-lg">
+                        <div class="text-5xl text-blue-600 mb-4">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="text-4xl font-bold text-blue-800 mb-2">${userCount || '0'}+</div>
+                        <div class="text-gray-600">Investidores</div>
+                    </div>
+                    
+                    <div class="bg-blue-50 rounded-2xl p-8 text-center shadow-lg">
+                        <div class="text-5xl text-blue-600 mb-4">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="text-4xl font-bold text-blue-800 mb-2">${projectCount || '0'}+</div>
+                        <div class="text-gray-600">Projetos</div>
+                    </div>
+                    
+                    <div class="bg-blue-50 rounded-2xl p-8 text-center shadow-lg">
+                        <div class="text-5xl text-blue-600 mb-4">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="text-4xl font-bold text-blue-800 mb-2">14.5%</div>
+                        <div class="text-gray-600">Rentabilidade Média</div>
+                    </div>
+                    
+                    <div class="bg-blue-50 rounded-2xl p-8 text-center shadow-lg">
+                        <div class="text-5xl text-blue-600 mb-4">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </div>
+                        <div class="text-4xl font-bold text-blue-800 mb-2">R$50M</div>
+                        <div class="text-gray-600">Captação Total</div>
+                    </div>
+                `;
+            } catch (error) {
+                console.error('Erro ao buscar estatísticas:', error);
+            }
+        }
+        
+        // Inicializar quando a página carregar
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchProjects();
+            fetchStats();
+            
+            // Smooth scrolling para links de navegação
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
                 });
             });
-        });
-
-        // Add hover effect to project cards
-        const projectCards = document.querySelectorAll('.project-card');
-        projectCards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.transform = 'translateY(-10px)';
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'translateY(0)';
-            });
-        });
-
-        // Simple animation for stats on scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = 1;
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.stat-card').forEach(card => {
-            card.style.opacity = 0;
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            observer.observe(card);
         });
     </script>
 </body>
